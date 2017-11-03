@@ -16,12 +16,9 @@ namespace TcpFileTrans
 {
     public partial class Form1 : Form
     {
-        private AbstractClient client;
         private AbstractServer server;
-        private string clientSendFileName;
         private string serverSendFileName;
         private BackgroundWorker BkgserverSendFile;
-        private BackgroundWorker BkgclientSendFile;
         public Form1()
         {
             InitializeComponent();
@@ -29,10 +26,7 @@ namespace TcpFileTrans
         }
         public void Init()
         {
-            client = new AbstractClient();
-            client.InitSocket(IPAddress.Parse("127.0.0.1"), 6000);
             server = new AbstractServer(6000);
-            client.dltDataCallBack += new AbstractClient.dltDeviceAccpetDataCallBack(ClientDataCallBack);
             server.dltClientData += new AbstractServer.dltRcvClientData(ServerDataCallBack);
             BkgserverSendFile = new BackgroundWorker();
             BkgserverSendFile.WorkerReportsProgress = true;
@@ -40,11 +34,6 @@ namespace TcpFileTrans
             BkgserverSendFile.DoWork += BkgserverSendFile_DoWork;
             BkgserverSendFile.ProgressChanged += BkgserverSendFile_ProgressChanged;
 
-            BkgclientSendFile = new BackgroundWorker();
-            BkgclientSendFile.WorkerSupportsCancellation = true;
-            BkgclientSendFile.WorkerReportsProgress = true;
-            BkgclientSendFile.DoWork += BkgclientSendFile_DoWork;
-            BkgclientSendFile.ProgressChanged += BkgclientSendFile_ProgressChanged;
         }
 
         private void BkgclientSendFile_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -137,7 +126,6 @@ namespace TcpFileTrans
 
         private void btn_client_Click(object sender, EventArgs e)
         {
-            client.StartSocket();
         }
 
         private void btn_serveropen_Click(object sender, EventArgs e)
