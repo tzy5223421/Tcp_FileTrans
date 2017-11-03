@@ -36,16 +36,6 @@ namespace TcpFileTrans
 
         }
 
-        private void BkgclientSendFile_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            // throw new NotImplementedException();
-        }
-
-        private void BkgclientSendFile_DoWork(object sender, DoWorkEventArgs e)
-        {
-            //    throw new NotImplementedException();
-        }
-
         private void BkgserverSendFile_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //  throw new NotImplementedException();
@@ -61,7 +51,6 @@ namespace TcpFileTrans
             try
             {
                 FileStream fs = new FileStream(serverSendFileName, FileMode.Open, FileAccess.Read, FileShare.None);
-                accpetfs = new FileStream("H:/GitHubProject/test.txt", FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
                 long filelength = fs.Length;
                 long leftlength = filelength;//未读取部分
                 int readlength = 0;//已读取部分
@@ -98,34 +87,12 @@ namespace TcpFileTrans
             }
             catch (Exception ex) { }
         }
-        private int ClientAccepConunt = 0;
-        public void ClientDataCallBack(int len, byte[] buffer)
-        {
-            try
-            {
-                if (System.Text.ASCIIEncoding.Default.GetString(buffer, 0, len).Equals("SendOver"))
-                {
-                    ClientAccepConunt = 0;
-                    accpetfs.Close();
-                }
-                else
-                {
-                    accpetfs.Write(buffer, 0, len);
-                    accpetfs.Flush();
-                }
-            }
-            catch (Exception ex) { }
-        }
 
         public void ServerDataCallBack(int len, byte[] buffer) { }
 
         private void btn_server_Click(object sender, EventArgs e)
         {
             server.StartSocket();
-        }
-
-        private void btn_client_Click(object sender, EventArgs e)
-        {
         }
 
         private void btn_serveropen_Click(object sender, EventArgs e)
