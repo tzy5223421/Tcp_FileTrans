@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpFileTrans_Server", "TcpF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tcp_Protocol", "C:\Users\tzy\Source\Repos\Tcp\Tcp_Protocol\Tcp_Protocol\Tcp_Protocol.csproj", "{38408CE4-1381-4FA2-870F-2D93946D5E71}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpFileTrans_Client", "TcpFileTrans_Client\TcpFileTrans_Client.csproj", "{DDFD81F3-3F04-4E17-972B-9A22770B4D0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{38408CE4-1381-4FA2-870F-2D93946D5E71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38408CE4-1381-4FA2-870F-2D93946D5E71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38408CE4-1381-4FA2-870F-2D93946D5E71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDFD81F3-3F04-4E17-972B-9A22770B4D0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDFD81F3-3F04-4E17-972B-9A22770B4D0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDFD81F3-3F04-4E17-972B-9A22770B4D0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDFD81F3-3F04-4E17-972B-9A22770B4D0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
