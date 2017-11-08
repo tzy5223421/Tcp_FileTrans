@@ -47,7 +47,6 @@ namespace TcpFileTrans
             this.Invoke(new Action(() => { this.richTextBox1.AppendText(str); }));
         }
 
-        FileStream accpetfs;
         private void BkgserverSendFile_DoWork(object sender, DoWorkEventArgs e)
         {
             //   throw new NotImplementedException();
@@ -72,7 +71,7 @@ namespace TcpFileTrans
                     if (filelength <= maxBufferLenght)
                     {
                         fs.Read(buffer, 0, (int)filelength);
-                        byte[] bytes = System.Text.ASCIIEncoding.Default.GetBytes("Accpet|");
+                        byte[] bytes = System.Text.Encoding.Default.GetBytes("Accpet@");
                         byte[] sendbyte = new byte[bytes.Length + filelength];
                         for (int i = 0; i < bytes.Length; i++)
                         {
@@ -80,7 +79,7 @@ namespace TcpFileTrans
                         }
                         for (int i = bytes.Length; i < sendbyte.Length; i++)
                         {
-                            sendbyte[i] = buffer[i - 7];
+                            sendbyte[i] = buffer[i - bytes.Length];
                         }
                         server.SendData(sendbyte);
                     }
@@ -97,27 +96,32 @@ namespace TcpFileTrans
                             {
                                 buffer = new byte[maxBufferLenght];
                                 readlength = fs.Read(buffer, 0, maxBufferLenght);
+
                             }
-                            //byte[] bytes = System.Text.ASCIIEncoding.Default.GetBytes("|");
-                            //byte[] sendbyte = new byte[bytes.Length + readlength];
-                            //for (int i = 0; i < bytes.Length; i++)
+                            //byte[] bytes_Head = System.Text.Encoding.Default.GetBytes("Accpet@");
+                            //byte[] bytes_End = System.Text.Encoding.Default.GetBytes("@End");
+                            //byte[] sendbyte = new byte[bytes_Head.Length + readlength + bytes_End.Length];
+                            //for (int i = 0; i < bytes_Head.Length; i++)
                             //{
-                            //    sendbyte[i] = bytes[i];
+                            //    sendbyte[i] = bytes_Head[i];
                             //}
-                            //for (int i = bytes.Length; i < sendbyte.Length; i++)
+                            //for (int i = bytes_Head.Length; i < sendbyte.Length - bytes_End.Length; i++)
                             //{
-                            //    sendbyte[i] = buffer[i - 7];
+                            //    sendbyte[i] = buffer[readlength - (sendbyte.Length - i - bytes_End.Length)];
+                            //}
+                            //for (int i = bytes_Head.Length + readlength; i < sendbyte.Length; i++)
+                            //{
+                            //    sendbyte[i] = bytes_End[Math.Abs(sendbyte.Length - i - bytes_End.Length)];
                             //}
                             server.SendData(buffer);
                             float per = (float)((((float)filelength - (float)leftlength) / (float)filelength) * 100);
                             BkgserverSendFile.ReportProgress((int)per, (float)(leftlength / filelength));
                             leftlength -= readlength;
-                            System.Threading.Thread.Sleep(100);
                         }
                     }
                     fs.Flush();
                     fs.Close();
-                    server.SendData("SendOver@");
+                    server.SendData("@SendOver");
                 }
                 catch (Exception ex) { }
             }
@@ -126,7 +130,7 @@ namespace TcpFileTrans
         FileStream saveFileStream = null;
         public void ServerDataCallBack(int len, byte[] buffer)
         {
-            string command = System.Text.ASCIIEncoding.Default.GetString(buffer, 0, len);
+            string command = System.Text.Encoding.Default.GetString(buffer, 0, len);
             string[] str = null;
             if (command.Contains("@"))
             {
@@ -155,12 +159,30 @@ namespace TcpFileTrans
                         }));
                     }
                 }
-                if (str[0] == "SendOver")
+                if (command.Contains("SendOver"))
                 {
-                    saveFileStream.Flush();
-                    saveFileStream.Close();
-                    saveFileStream = null;
-                    MessageBox.Show("文件接收完毕");
+                    int strlength = str.Length;
+                    if (strlength == 1)
+                    {
+                        saveFileStream.Flush();
+                        saveFileStream.Close();
+                        MessageBox.Show("文件接收完毕");
+                    }
+                    else if (str[strlength - 1] == "SendOver")
+                    {
+                        string data = command.Substring(0, command.Length - 9);
+                        byte[] filedata = System.Text.Encoding.Default.GetBytes(data);
+                        saveFileStream.Write(filedata, 0, filedata.Length);
+                        saveFileStream.Flush();
+                        saveFileStream.Close();
+                        MessageBox.Show("文件接收完毕");
+                    }
+                }
+                if (str[0] == "Accpet" && str[str.Length - 1] == "End")
+                {
+                    byte[] Command_Head = System.Text.Encoding.Default.GetBytes(str[0] + "@");
+                    byte[] Command_End = System.Text.Encoding.Default.GetBytes("@" + str[str.Length - 1]);
+                    saveFileStream.Write(buffer, Command_Head.Length, len - Command_End.Length);
                 }
             }
             else
@@ -176,6 +198,7 @@ namespace TcpFileTrans
                 {
                     saveFileStream.Write(buffer, 0, len);
                 }
+
             }
             //BkgserverSendFile.RunWorkerAsync(command);
         }

@@ -80,7 +80,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\tzy\Source\Repos\Tcp\Tcp_Protocol\Tcp_Protocol\Tcp_Protocol.csproj">
+    <ProjectReference Include="..\..\..\Tcp\Tcp_Protocol\Tcp_Protocol\Tcp_Protocol.csproj">
       <Project>{38408ce4-1381-4fa2-870f-2d93946d5e71}</Project>
       <Name>Tcp_Protocol</Name>
     </ProjectReference>

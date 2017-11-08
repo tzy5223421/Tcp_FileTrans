@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpFileTrans_Server", "TcpFileTrans\TcpFileTrans_Server.csproj", "{FCBC2353-06E8-4BA9-90A1-7BA1E9C11C37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tcp_Protocol", "C:\Users\tzy\Source\Repos\Tcp\Tcp_Protocol\Tcp_Protocol\Tcp_Protocol.csproj", "{38408CE4-1381-4FA2-870F-2D93946D5E71}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpFileTrans_Client", "TcpFileTrans_Client\TcpFileTrans_Client.csproj", "{DDFD81F3-3F04-4E17-972B-9A22770B4D0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tcp_Protocol", "..\..\Tcp\Tcp_Protocol\Tcp_Protocol\Tcp_Protocol.csproj", "{38408CE4-1381-4FA2-870F-2D93946D5E71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,16 +19,19 @@ Global
 		{FCBC2353-06E8-4BA9-90A1-7BA1E9C11C37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCBC2353-06E8-4BA9-90A1-7BA1E9C11C37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCBC2353-06E8-4BA9-90A1-7BA1E9C11C37}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38408CE4-1381-4FA2-870F-2D93946D5E71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38408CE4-1381-4FA2-870F-2D93946D5E71}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38408CE4-1381-4FA2-870F-2D93946D5E71}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38408CE4-1381-4FA2-870F-2D93946D5E71}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DDFD81F3-3F04-4E17-972B-9A22770B4D0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DDFD81F3-3F04-4E17-972B-9A22770B4D0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDFD81F3-3F04-4E17-972B-9A22770B4D0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDFD81F3-3F04-4E17-972B-9A22770B4D0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38408CE4-1381-4FA2-870F-2D93946D5E71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38408CE4-1381-4FA2-870F-2D93946D5E71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38408CE4-1381-4FA2-870F-2D93946D5E71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38408CE4-1381-4FA2-870F-2D93946D5E71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F7B2CF9C-5B6B-481F-A7ED-074508775671}
 	EndGlobalSection
 EndGlobal
